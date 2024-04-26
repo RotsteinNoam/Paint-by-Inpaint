@@ -1,5 +1,4 @@
-# Paint by Inpaint
-## Learning to Add Image Objects by Removing Them First
+# Paint by Inpaint \\ Learning to Add Image Objects by Removing Them First
 Welcome to the official repository for our paper!
 
 ## Coming Soon
