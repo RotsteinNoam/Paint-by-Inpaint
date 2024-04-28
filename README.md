@@ -2,7 +2,7 @@
 Welcome to the official repository for our paper!
 
 
-<img src=figures/teaser.png width="90%" alt="Teaset Figure">
+<img src=figures/teaser.png width="80%" alt="Teaset Figure">
 
 ## Resources
 
