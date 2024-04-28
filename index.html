@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paint by Inpaint:  Learning to Add Image Objects by Removing Them First</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap">
+  <link rel="icon" href="buttons/web_logo3.png">
+
+  <style>
+    body {
+      background-color: rgb(245, 245, 245);
+      color: rgb(49, 48, 48);
+      font-family: 'Google Sans', sans-serif; /* Specific font for headers */
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 50px 0;
+      box-sizing: border-box;
+    }
+
+    .main-container {
+      padding: 15px;
+      background-color: rgb(245, 245, 245);
+      max-width: 84%;
+      box-sizing: border-box;
+      margin-top: 50px;
+      align-items: center; /* This will center all children */
+    }
+
+    h1 {
+      font-family: 'Google Sans', sans-serif; /* Specific font for headers */
+      font-size: 56px;
+      line-height: 1.2;
+      margin-bottom: -18px;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-family: 'Google Sans', sans-serif; /* Specific font for headers */
+      font-size: 30px;
+      line-height: 1.2;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-family: 'Google Sans', sans-serif; /* Specific font for headers */
+      font-size: 35px;
+      line-height: 1.2;
+      margin: 50px 0;
+      margin-top: 25px;
+      margin-bottom: 20px;
+    }
+
+    h4 {
+      font-family: 'Google Sans', sans-serif; /* Specific font for headers */
+      font-size: 25px;
+      line-height: 1.2;
+      margin-top: 25px;
+      margin-bottom: 20px;
+      max-width: 70%;
+      margin-left: auto; /* Centers the h4 block horizontally */
+      margin-right: auto; 
+      text-align: center; /* Centers the text horizontally */
+    }
+
+    h5 {
+      font-family: 'Google Sans', sans-serif; /* Specific font for headers */
+      font-size: 25px;
+      line-height: 1.2;
+      margin: 50px 0;
+      margin-top: 25px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      display: block;
+      margin: auto auto; /* Increase the top margin */
+    }
+
+    p {
+      font-size: 18px; /* Increase the font size */
+      margin: 10px 0;
+    }
+
+    psmall {
+      font-size: 12px; /* Increase the font size */
+      margin: 10px 0;
+      margin-bottom: 60px; /* Increase this value to add more space below the text */
+      color: grey; /* Set the color to grey */
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center; /* Align the images to the center */
+      gap: 10px; /* Adjust the space between the images */
+      width: 100%; /* Add this line */
+      text-decoration: none; /* Removes underline */
+    }
+
+    .image-item img {
+      max-width: 30px; /* Adjust the size of the images */
+      height: auto;
+    }
+
+    .image-title {
+      font-size: 18px; /* Adjust the font size */
+      text-align: center;
+      margin-top: 7px; /* Adjust the space above the text */
+      margin-bottom: 5px; /* Adjust the space below the text */
+      color: black;
+    }
+
+    .image-item {
+      opacity: 0.5; /* Add this line to set the transparency */
+    }
+
+    .image-item:hover {
+      opacity: 1; /* Add this line to set the opacity back to 100% on hover */
+    }
+
+    .image-container a {
+    text-decoration: none; 
+    }
+
+    .image-container a .image-title {
+      color:  black;
+    }
+
+    .image-container a:hover .image-title {
+      text-decoration: underline; 
+    }
+
+    .example-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* if you want the images centered */
+      height: auto;
+      max-width: 58%; /* Adjust this as needed to give space between images */
+      margin-left: auto; /* Centers the container horizontally */
+      margin-right: auto; /* Centers the container horizontally */  
+    }
+
+    .example-container2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* if you want the images centered */
+      height: auto;
+      max-width: 40%; /* Adjust this as needed to give space between images */
+      margin-left: auto; /* Centers the container horizontally */
+      margin-right: auto; /* Centers the container horizontally */
+      margin-top: -20pt; /* Centers the container horizontally */    
+    }
+    .example-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;  /* Ensure items are aligned in the center vertically if needed */
+      width: 80%; /* Adjust this as needed to give space between images */
+      margin: auto auto; /* Centers the row horizontally within its parent container */
+    }
+
+    .example-image {
+      max-width: 25%; /* Adjust this as needed to fit two images */
+      height: auto;
+      margin-right: 2px; /* Adds space to the right of each image */
+      margin-left: 2px; /* Adds space to the right of each image */
+    } 
+
+    .example-row-2 {
+      display: flex;
+      justify-content: space-around;
+      width: 64%; /* Adjust this as needed to give space between images */
+      margin-bottom: 20px; /* Space between rows */
+    }
+
+    .method-container {
+      height: auto;
+      max-width: 78%; /* Adjust this as needed to give space between images */
+      margin-left: auto; /* Centers the container horizontally */
+      margin-right: auto; /* Centers the container horizontally */  
+    }
+
+    .method-image {
+      max-width: 60%; /* Adjust this as needed */
+      height: auto;
+      margin-bottom: 20px; /* Add space between images */
+    }
+
+    .method-image2 {
+      max-width: 72%; /* Adjust this as needed */
+      height: auto;
+      margin-bottom: 20px; /* Add space between images */
+    }
+
+    .image-description {
+      text-align: center;
+      max-width: 60%; /* Adjust as needed */
+      margin-top: 10px; /* Adjust as needed */
+      margin-left: auto; /* Centers the container horizontally */
+      margin-right: auto; /* Centers the container horizontally */  
+    }
+
+    .results-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 50%; /* Adjust this value to your desired width */
+      margin: 0 auto; /* Center the container */
+    }
+
+    .table-image {
+      width: 40%;
+      height: auto;
+    }
+    
+    .table-image2 {
+      width: 50%;
+      height: auto;
+    }
+
+    .author-links a {
+      text-decoration: none;
+      color: black;
+    }
+  .institute {
+    margin-top: 0;
+    margin-bottom: -16px; /* Adjust this value as needed */
+  }
+
+  .limited-width {
+    width: 66%;
+    margin: auto; /* Centering the paragraph */
+  }
+</style>
+
+</style>
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <h1>Paint by Inpaint</h1>
+    <br>
+    <h2>Learning to Add Image Objects by Removing Them First</h2>
+    <!-- <p>Noam Rotstein<span style="font-size: 18px;">*</span> &nbsp;&nbsp; David Bensaid<span style="font-size: 18px;">*</span> &nbsp;&nbsp; Shaked Brody &nbsp;&nbsp; Roy Ganz &nbsp;&nbsp; Ron Kimmel</p> -->
+    <p class="author-links">
+      <a href="mailto:navve.wasserman@weizmann.ac.il">Navve Wasserman<sup>1</sup><span style="font-size: 18px;">*</span></a> &nbsp;&nbsp; 
+      <a href="mailto:snoamr@cs.technion.ac.il">Noam Rotstein<sup>2</sup><span style="font-size: 18px;">*</span></a> &nbsp;&nbsp; 
+      <a href="mailto:ganz@campus.technion.ac.il">Roy Ganz<sup>2</sup></a> &nbsp;&nbsp; 
+      <a href="mailto:ron@cs.technion.ac.il">Ron Kimmel<sup>2</sup></a>
+    </p>
+    <p class="institute"><sup>1</sup>Weizmann Institute of Science</p>
+    <p><sup>2</sup>Technion - Israel Institute of Technology</p>
+    <psmall style="font-size: 15px;">*Denotes Equal Contribution</psmall>
+    <br>
+    <br>
+    <div class="image-container">
+      <a href="">
+        <div class="image-item">
+          <img src="buttons/paper.jpg" alt="Paper">
+          <p class="image-title">Paper</p>
+        </div>
+      </a>
+      <a href="https://github.com/RotsteinNoam/FuseCap/tree/main">
+        <div class="image-item">
+          <img src="buttons/code_soon.png" alt="Code">
+          <p class="image-title">Code</p>
+        </div>
+      </a>
+      <a href="">
+        <div class="image-item">
+          <img src="buttons/dataset_soon.png" alt="Dataset">
+          <p class="image-title">Dataset</p>
+        </div>
+      </a>
+      <a href="">
+        <div class="image-item">
+          <img src="buttons/demo_soon.png" alt="Demo">
+          <p class="image-title">Demo</p>
+        </div>
+      </a>
+    </div>
+  <br>
+  <h3>TL;DR</h3>
+  <h4>
+    By creating an extensive pipeline for removing objects from images using a pretrained inpainting model, and by generating realistic object addition instructions via a VLM and an LLM, we have created a large-scale dataset named PIPE. Utilizing PIPE, we train a diffusion model to reverse the removal process, effectively adding objects to images and achieving SOTA editing results.
+  </h4>
+  <br><br>
+  <h3>Object Addition Examples</h3>
+  <div class="example-row">
+    <img class="example-image" src="teaser_imgs/1.png" alt="Example Image 1">
+    <img class="example-image" src="teaser_imgs/2.png" alt="Example Image 2">
+    <img class="example-image" src="teaser_imgs/3.png" alt="Example Image 3">
+    <img class="example-image" src="teaser_imgs/4.png" alt="Example Image 4">
+  </div>
+  <div class="example-row">
+    <img class="example-image" src="teaser_imgs/5.png" alt="Example Image 5">
+    <img class="example-image" src="teaser_imgs/6.png" alt="Example Image 6">
+    <img class="example-image" src="teaser_imgs/7.png" alt="Example Image 7">
+    <img class="example-image" src="teaser_imgs/8.png" alt="Example Image 8">
+  </div>
+  <div class="example-row">
+    <img class="example-image" src="teaser_imgs/9.png" alt="Example Image 9">
+    <img class="example-image" src="teaser_imgs/10.png" alt="Example Image 10">
+    <img class="example-image" src="teaser_imgs/11.png" alt="Example Image 11">
+    <img class="example-image" src="teaser_imgs/12.png" alt="Example Image 12">
+  </div>
+  <br>
+  <h3>Abstract</h3>
+  <p class="limited-width">
+  Image editing has advanced significantly with the introduction of text-conditioned diffusion models. Despite this progress, seamlessly adding objects to images based on textual instructions without requiring user-provided input masks remains a challenge. We address this by leveraging the insight that removing objects (<code>Inpaint</code>) is significantly simpler than its inverse process of adding them (<code>Paint</code>), attributed to the utilization of segmentation mask datasets alongside inpainting models that inpaint within these masks. Capitalizing on this realization, by implementing an automated and extensive pipeline, we curate a filtered large-scale image dataset containing pairs of images and their corresponding object-removed versions. Using these pairs, we train a diffusion model to inverse the inpainting process, effectively adding objects into images. Unlike other editing datasets, ours features natural target images instead of synthetic ones; moreover, it maintains consistency between source and target by construction. Additionally, we utilize a large Vision-Language Model to provide detailed descriptions of the removed objects and a Large Language Model to convert these descriptions into diverse, natural-language instructions. We show that the trained model surpasses existing ones both qualitatively and quantitatively, and release the large-scale dataset alongside the trained models for the community.
+  </p>
+  <br>
+  <h3>Method</h3>
+  <div class="method-container">
+    <br>
+    <img class="method-image" src="more_figures/method_v3_a.png" alt="Method Image 1">
+    <p class="image-description">In the PIPE dataset generation phase, two distinct processes are employed:
+      <br>
+      1. Addition instructions are generated. Illustrated in the figure is the VLM-LLM based instruction generation process, where visual object details are extracted using a VLM and subsequently formulated into an addition instruction with the aid of an LLM.
+      <br>
+      2. The input mask, combined with the original image, employs a frozen inpainting model to remove the object from the image.
+    </p>
+    <img class="method-image" src="more_figures/method_v3_b.png" alt="Method Image 2">
+    <p class="image-description">In the training phase, the PIPE dataset is employed to train a model to reverse the inpainting process, thereby adding objects to images.
+    </p>
+  </div>
+  <br><br>
+  <h3>Object Removal Filtering</h3>
+  <div class="method-container">
+    <br>
+    <img class="method-image" src="more_figures/method_filtering.png" alt="Method filtering Image">
+    <p class="image-description">
+      In constructing PIPE, we apply several filtering stages to address inpainting drawbacks.
+      <br>
+      The first row presents a pre-removal filter targeting abnormal object views caused by blur and low quality.
+      The second and third rows illustrate post-removal stages.
+      The second row addresses inconsistencies indicated by a lack of CLIP consensus among three inpainting outputs of the same image, signifying substantial inpainting variance.
+      The third row employs multimodal CLIP filtering to ensure low semantic similarity with the original object name.
+      The final row illustrates a successful removal outcome that does not require filtering.
+    </p>
+  </div>
+  <br>
+  <!-- <h3>Building PIPE Dataset</h3>
+  <div class="method-container">
+    <img class="method-image2" src="more_figures/method_vlmllm.png" alt="Method vlm+llm Image">
+    <p class="image-description">    In the dataset development, two distinct processes are employed:
+      (i) objects are removed through initial and subsequent processing stages;
+      (ii) addition instructions are generated. Illustrated in the figure is the VLM-LLM based instruction generation process, where visual object details are extracted using a VLM and subsequently formulated into an addition instruction with the aid of an LLM.</p>
+  </div> -->
+  <br>
+  <h3>PIPE Examples</h3>
+  <img class="example-container" src="more_figures/pipe_data.png" alt="pipe data Image 1">
+  <br>
+  <h5>Editing Datasets Comparison</h5>
+      <img class="example-container2" src="more_figures/pipe_comparison.png" alt="pipe data Image 2">
+  <br>
+  <br>
+  <h3>Comparative Analysis With  Other Image Editing Models</h3>
+  <img class="table-image" src="more_figures/model_comparison.png" alt="Results Image">
+  <p class="limited-width">
+    <!-- Comparison of our model with leading editing models,
+    demonstrating superior fidelity to instructions and precise object addition,
+    while maintaining higher consistency with original images.
+    The paper also includes a comprehensive qualitative evaluation to further substantiate our findings.  -->
+  </p>
+  <h5>Human Evaluation</h5>
+  <img class="table-image" src="more_figures/model_human_comparison.png" alt="Results Image">
+  <p class="limited-width">
+    <!-- We conducted a human evaluation survey to compare our model with InstructPix2Pix. -->
+    <!-- <br> -->
+    The results clearly show a preference for our model compared to InstructPix2Pix,
+    <br>
+    with an average global preference rate of <strong>72.5%</strong> for its 
+    <br>
+    alignment with edit requests and overall image quality.
+  </p>
+  <br>
+  <h3>Leveraging PIPE for General Editing</h3>
+  <img class="table-image2" src="more_figures/general_editing_comparison.png" alt="Results Image">
+  <br>
+  <p class="limited-width">
+    We explore the application of our dataset in the broader context of image editing, extending its use beyond just object addition.
+    PIPE is merged with the InstructPix2Pix general editing dataset to train an editing diffusion model.
+    The examples and quantitative results presented in the paper demonstrate that our model establishes new state-of-the-art scores for general editing.
+    <!-- Collectively, the results confirm that the PIPE dataset can be combined with any image editing dataset to enhance overall editing performance. -->
+  </p>
+</div>
+<!-- <div style="width: 55%; margin: 0 auto; text-align: left;">
+  <h3 style="font-size: 1.8em;">BibTeX</h3>
+  <pre style="background-color: #e6dddd; padding: 10px;"><code>@article{rotstein2023fusecap,
+  title={FuseCap: Leveraging Large Language Models to Fuse Visual Data into Enriched Image Captions},
+  author={Rotstein, Noam and Bensaid, David and Brody, Shaked and Ganz, Roy and Kimmel, Ron},
+  journal={arXiv preprint arXiv:2305.17718},
+  year={2023}
+}</code></pre> -->
+</div>
+<br><br><br><br><br><br><br><br>
+</div>
+</body>
+</html>
