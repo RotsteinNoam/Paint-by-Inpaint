@@ -8,7 +8,7 @@ Welcome to the official repository for our paper!
 
 - 💻 **Project Page**: For more details, visit the official [project page](https://rotsteinnoam.github.io/Paint-by-Inpaint/).
 
-- 📝 **Read the Paper**: You can find the paper [here]().
+- 📝 **Read the Paper**: You can find the paper [here](https://arxiv.org/abs/2404.18212).
     
 
 ## Coming Soon
