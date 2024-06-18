@@ -10,6 +10,8 @@ Welcome to the official repository for our paper!
 
 - 📝 **Read the Paper**: You can find the paper [here](https://arxiv.org/abs/2404.18212).
 
+- 🚀 **Try Our Demo**: Experience our trained models with the PIPE dataset, available on Huggingface Spaces.
+
 - 🗂️ **Use the PIPE Dataset**: For more details, see the [PIPE Dataset](#pipe-dataset) section below.
 
 
