@@ -20,6 +20,45 @@ The code and demo are currently being prepared and will be available soon.
 
 Please check back for updates.
 
+## Trained Models
+
+We release our trained models:
+- [addition-base-model](https://huggingface.co/paint-by-inpaint/add-base): Trained on the PIPE dataset, specifically designed for object addition.
+- [addition-finetuned-model](https://huggingface.co/paint-by-inpaint/add-finetuned-mb): The addition-base-model fine-tuned on a MagicBrush addition subset.
+- [general-base-model](https://huggingface.co/paint-by-inpaint/general-base): Trained on the combined PIPE and InstructPix2Pix datasets, intended for general editing.
+- [general-finetuned-model](https://huggingface.co/paint-by-inpaint/general-finetuned-mb): The general-base-model fine-tuned on the full MagicBrush dataset.
+
+Our models are simple to run using the InstructPix2Pix pipeline:
+```python
+from diffusers import StableDiffusionInstructPix2PixPipeline, EulerAncestralDiscreteScheduler
+import torch
+import requests
+from io import BytesIO
+
+model_name = "paint-by-inpaint/add-base"  # addition-base-model
+# model_name = "paint-by-inpaint/add-finetuned-mb"  # addition-finetuned-model
+# model_name = "paint-by-inpaint/general-base"  # general-base-model
+# model_name = "paint-by-inpaint/general-finetuned-mb"  # general-finetuned-model
+
+diffusion_steps = 50
+device = "cuda"
+image_url = "https://paint-by-inpaint-demo.hf.space/file=/tmp/gradio/99cd3a15aa9bdd3220b4063ebc3ac05e07a611b8/messi.jpeg"
+image = Image.open(BytesIO(requests.get(image_url).content)).resize((512, 512))
+
+pipe = StableDiffusionInstructPix2PixPipeline.from_pretrained(model_name, torch_dtype=torch.float16, safety_checker=None).to(device)
+pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
+
+# Generate the modified image
+out_images = pipe(
+    "Add a royal silver crown", 
+    image=image, 
+    guidance_scale=7, 
+    image_guidance_scale=1.5, 
+    num_inference_steps=diffusion_steps,
+    num_images_per_prompt=1
+).images
+
+```
 
 ## PIPE Dataset
 The PIPE (Paint by Inpaint Editing) dataset is a novel resource for image editing, specifically designed to enhance the process of seamlessly adding objects to images by following instructions. This extensive dataset, comprising approximately 1 million image pairs, includes both object-present and object-removed versions of images with over 1400 distinct object classes along with object addition language instructions with countless different object attributes. Unlike other editing datasets, PIPE consists of natural target images and maintains consistency between source and target images by construction.
