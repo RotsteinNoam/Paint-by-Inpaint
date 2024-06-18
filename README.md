@@ -12,11 +12,13 @@ Welcome to the official repository for our paper!
 
 - 🚀 **Try Our Demo**: Explore our models trained with the PIPE dataset, now available on [Huggingface Spaces](https://huggingface.co/spaces/paint-by-inpaint/demo).
 
-- 🗂️ **Use the PIPE Dataset**: For more details, see the [PIPE Dataset](#pipe-dataset) section below.
+- 🏋️‍♂️ **Use Trained Models**:  See how to use our trained model weights in the [Trained Models](#trained-models)section.
+
+- 🗂️ **Use the PIPE Dataset**: For more details, see the [PIPE Dataset](#pipe-dataset) section.
 
 
 ## Coming Soon
-The code and demo are currently being prepared and will be available soon.
+The training code is currently being prepared and will be available soon.
 
 Please check back for updates.
 
