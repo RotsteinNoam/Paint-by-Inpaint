@@ -84,6 +84,10 @@ test_dataset = PIPE_Dataset(pipe_dataset, split='test')
 test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=True)
 ```
 
+### Test Set
+The PIPE test set can be downloaded from [google drive](https://drive.google.com/file/d/1lM_K4DFmply7FctneEgly8wbwq3KBdle/view).
+It contains 752 image pairs from the COCO dataset—without and with objects—along with object addition instructions, and includes a README file that explains the procedure for loading it.
+
 ##  BibTeX
 ```
 @article{wasserman2024paint,
