@@ -36,6 +36,7 @@ from diffusers import StableDiffusionInstructPix2PixPipeline, EulerAncestralDisc
 import torch
 import requests
 from io import BytesIO
+from PIL import Image
 
 model_name = "paint-by-inpaint/add-base"  # addition-base-model
 # model_name = "paint-by-inpaint/add-finetuned-mb"  # addition-finetuned-model
