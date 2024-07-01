@@ -89,6 +89,9 @@ test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=True)
 The PIPE test set can be downloaded from [google drive](https://drive.google.com/file/d/1lM_K4DFmply7FctneEgly8wbwq3KBdle/view).
 It contains 752 image pairs from the COCO dataset—without and with objects—along with object addition instructions, and includes a README file that explains the procedure for loading it.
 
+### Object Masks
+The masks used to generate the PIPE train and test dataset is available on [Hugging Face](https://huggingface.co/datasets/paint-by-inpaint/PIPE_Masks).
+
 ##  BibTeX
 ```
 @article{wasserman2024paint,
