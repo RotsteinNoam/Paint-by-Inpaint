@@ -90,7 +90,7 @@ The PIPE test set can be downloaded from [google drive](https://drive.google.com
 It contains 752 image pairs from the COCO dataset—without and with objects—along with object addition instructions, and includes a README file that explains the procedure for loading it.
 
 ### Object Masks
-The masks used to generate the PIPE train and test dataset is available on [Hugging Face](https://huggingface.co/datasets/paint-by-inpaint/PIPE_Masks).
+The masks used to generate the PIPE train and test dataset are available on [Hugging Face](https://huggingface.co/datasets/paint-by-inpaint/PIPE_Masks).
 
 ##  BibTeX
 ```
