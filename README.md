@@ -17,11 +17,6 @@ Welcome to the official repository for our paper!
 - 🗂️ **Use the PIPE Dataset**: For more details, see the [PIPE Dataset](#pipe-dataset) section.
 
 
-## Coming Soon
-The training code is currently being prepared and will be available soon.
-
-Please check back for updates.
-
 ## Trained Models
 
 We release our trained models:
