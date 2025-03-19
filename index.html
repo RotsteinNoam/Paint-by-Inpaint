@@ -404,6 +404,13 @@ Image editing has advanced significantly with the introduction of text-condition
     The examples and quantitative results presented in the paper demonstrate that our model establishes new state-of-the-art scores for general editing.
     <!-- Collectively, the results confirm that the PIPE dataset can be combined with any image editing dataset to enhance overall editing performance. -->
   </p>
+  <br>
+  <h3>Multiple Object Addition</h3>
+  <img class="table-image2" src="more_figures/multi_objects.jpg" alt="Results Image">
+  <p class="image-description">
+  Using our model to add multiple objects through recurrent application presents a challenge: each addition requires a decode–encode cycle through the VAE, which progressively degrades image quality. To mitigate this, we perform all edits in latent space—encoding only before the first addition and decoding only after the final one.
+</p>
+  <br>
 <!-- </div> -->
 <div style="width: 55%; margin: 0 auto; text-align: left;">
   <h3 style="font-size: 1.8em;">BibTeX</h3>
