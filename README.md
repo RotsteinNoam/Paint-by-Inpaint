@@ -1,6 +1,7 @@
 # Paint by Inpaint: Learning to Add Image Objects by <br> Removing Them First
 Welcome to the official repository for our paper!
 
+We are happy to announce that our paper has been **accepted to CVPR 2025**! 🎉  
 
 <img src=figures/teaser.png width="80%" alt="Teaset Figure">
 
