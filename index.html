@@ -348,15 +348,13 @@ Image editing has advanced significantly with the introduction of text-condition
   <h3>Object Removal Filtering</h3>
   <div class="method-container">
     <br>
-    <img class="method-image3" src="more_figures/method_filtering.png" alt="Method filtering Image">
+    <img class="method-image3" src="more_figures/filtering_updated.png" alt="Method filtering Image">
     <p class="image-description">
       In constructing PIPE, we apply several filtering stages to address inpainting drawbacks.
       <br>
-      The first row presents a pre-removal filter targeting abnormal object views caused by blur and low quality.
-      The second and third rows illustrate post-removal stages.
-      The second row addresses inconsistencies indicated by a lack of CLIP consensus among three inpainting outputs of the same image, signifying substantial inpainting variance.
-      The third row employs multimodal CLIP filtering to ensure low semantic similarity with the original object name.
-      The final row illustrates a successful removal outcome that does not require filtering.
+      Initially, a pre-removal filter targets abnormal object views due to blur and low quality.
+      Subsequently, a post-removal inconsistency filter identifies a lack of CLIP consensus among three inpainting outputs, indicating substantial variance and potential object regeneration.
+      Finally, a post-removal multimodal CLIP filtering ensures low semantic similarity with the original object name.
     </p>
   </div>
   <br>
