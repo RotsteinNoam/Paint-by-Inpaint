@@ -11,6 +11,8 @@ We are happy to announce that our paper has been **accepted to CVPR 2025**! 🎉
 
 - 📝 **Read the Paper**: You can find the paper [here](https://arxiv.org/abs/2404.18212).
 
+- 🎥 **Watch the Video**: Check out the project video on [YouTube](https://www.youtube.com/embed/Zhj1zkrYrcY).
+
 - 🚀 **Try Our Demo**: Explore our models trained with the PIPE dataset, now available on [Huggingface Spaces](https://huggingface.co/spaces/paint-by-inpaint/demo).
 
 - 🏋️‍♂️ **Use Trained Models**:  See how to use our trained model weights in the [Trained Models](#trained-models) section.
