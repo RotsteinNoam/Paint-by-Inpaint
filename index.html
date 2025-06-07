@@ -222,17 +222,19 @@
     
     .video-wrapper {
       position: relative;
-      padding-bottom: 0%;   /* 16 : 9 aspect-ratio */
+      padding-bottom: 27%;   /* 16 : 9 aspect-ratio */
       height: 0;
       overflow: hidden;
+      max-width: 50%;
+      margin: 0 auto;
     }
     
     .video-wrapper iframe {
       position: absolute;
       top: 0;
       left: 0;
-      width: 50%;
-      height: 28%;
+      width: 100%;
+      height: 100%;
       border: 0;
     }
     
@@ -346,7 +348,7 @@
 <h3>Project Video</h3>
 <div class="video-wrapper">
   <iframe
-    src="https://www.youtube.com/embed/Zhj1zkrYrcY"
+    src="https://youtu.be/Zhj1zkrYrcY?si=679M71rjJabo460V&t=1"
     title="Paint by Inpaint video"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen>
