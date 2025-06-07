@@ -222,9 +222,13 @@
     
     .video-wrapper {
       position: relative;
+      padding-bottom: 56.25%;   /* 16 : 9 aspect ratio */
       height: 0;
       overflow: hidden;
-      max-width: 50%;           /* size — tweak as you like */
+    
+      /* Centre it and make it smaller */
+      max-width: 60%;
+      margin: 0 auto 12px;
     }
     
     .video-wrapper iframe {
